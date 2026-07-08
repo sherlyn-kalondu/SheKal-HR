@@ -117,3 +117,101 @@ class Branch(BaseModel):
 
     def __str__(self):
         return f"{self.name} ({self.company.name})"
+
+
+class Department(BaseModel):
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        related_name="departments",
+    )
+
+    branch = models.ForeignKey(
+        Branch,
+        on_delete=models.CASCADE,
+        related_name="departments",
+        null=True,
+        blank=True,
+    )
+
+    name = models.CharField(max_length=150)
+
+    department_code = models.CharField(
+        max_length=20,
+        unique=True,
+    )
+
+    description = models.TextField(
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        db_table = "departments"
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+
+class Position(BaseModel):
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.CASCADE,
+        related_name="positions",
+    )
+
+    title = models.CharField(max_length=150)
+
+    position_code = models.CharField(
+        max_length=20,
+        unique=True,
+    )
+
+    description = models.TextField(
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        db_table = "positions"
+        ordering = ["title"]
+
+    def __str__(self):
+        return self.title
+
+
+class EmploymentType(BaseModel):
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+    )
+
+    description = models.TextField(
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        db_table = "employment_types"
+
+    def __str__(self):
+        return self.name
+
+
+class JobGrade(BaseModel):
+    grade = models.CharField(
+        max_length=20,
+        unique=True,
+    )
+
+    description = models.TextField(
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        db_table = "job_grades"
+
+    def __str__(self):
+        return self.grade

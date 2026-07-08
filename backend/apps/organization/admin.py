@@ -1,6 +1,14 @@
 from django.contrib import admin
 
-from .models import Company, Branch
+from .models import (
+    Company,
+    Branch,
+    Department,
+    Position,
+    EmploymentType,
+    JobGrade,
+)
+
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
@@ -40,3 +48,10 @@ class BranchAdmin(admin.ModelAdmin):
     list_filter = (
         "company",
     )
+
+
+# Register remaining models
+admin.site.register(Department)
+admin.site.register(Position)
+admin.site.register(EmploymentType)
+admin.site.register(JobGrade)
