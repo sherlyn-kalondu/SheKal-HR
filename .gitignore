@@ -1,0 +1,35 @@
+# ==========================
+# Python
+# ==========================
+backend/.venv/
+backend/__pycache__/
+backend/**/*.py[cod]
+backend/*.sqlite3
+
+# ==========================
+# Environment Variables
+# ==========================
+backend/.env
+
+# ==========================
+# Django
+# ==========================
+backend/media/
+backend/staticfiles/
+backend/logs/
+
+# ==========================
+# Node
+# ==========================
+frontend/node_modules/
+
+# ==========================
+# VS Code
+# ==========================
+.vscode/
+
+# ==========================
+# OS Files
+# ==========================
+.DS_Store
+Thumbs.db
