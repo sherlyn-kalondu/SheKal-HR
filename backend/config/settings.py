@@ -28,7 +28,10 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS",
+    default=["127.0.0.1", "localhost"],
+)
 
 
 # Application definition
@@ -61,6 +64,7 @@ INSTALLED_APPS = [
     'apps.notifications',
     'apps.audit',
     'apps.reports',
+    'apps.administration'
 ]
 
 MIDDLEWARE = [
@@ -160,3 +164,4 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = "identity.User"

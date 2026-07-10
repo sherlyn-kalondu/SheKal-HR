@@ -1,9 +1,9 @@
 from django.db import models
 
-from apps.common.models import BaseModel
+from apps.common.models import TimeStampedModel
 
 
-class Company(BaseModel):
+class Company(TimeStampedModel):
     """
     Represents a company using the HR system.
     """
@@ -64,6 +64,9 @@ class Company(BaseModel):
         blank=True,
         null=True,
     )
+    is_active = models.BooleanField(
+    default=True,
+)
 
     class Meta:
         db_table = "companies"
@@ -74,8 +77,7 @@ class Company(BaseModel):
     def __str__(self):
         return self.name
 
-
-class Branch(BaseModel):
+class Branch(TimeStampedModel):
     company = models.ForeignKey(
         Company,
         on_delete=models.CASCADE,
@@ -118,8 +120,7 @@ class Branch(BaseModel):
     def __str__(self):
         return f"{self.name} ({self.company.name})"
 
-
-class Department(BaseModel):
+class Department(TimeStampedModel):
     company = models.ForeignKey(
         Company,
         on_delete=models.CASCADE,
@@ -154,7 +155,7 @@ class Department(BaseModel):
         return self.name
 
 
-class Position(BaseModel):
+class Position(TimeStampedModel):
     department = models.ForeignKey(
         Department,
         on_delete=models.CASCADE,
@@ -181,7 +182,7 @@ class Position(BaseModel):
         return self.title
 
 
-class EmploymentType(BaseModel):
+class EmploymentType(TimeStampedModel):
     name = models.CharField(
         max_length=100,
         unique=True,
@@ -199,7 +200,7 @@ class EmploymentType(BaseModel):
         return self.name
 
 
-class JobGrade(BaseModel):
+class JobGrade(TimeStampedModel):
     grade = models.CharField(
         max_length=20,
         unique=True,
